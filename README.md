@@ -3,7 +3,7 @@
 
 ## Installation
 ```shell
-pip install torch, pybullet, numpy, tqdm, numpngw, matplotlib, torchdiffeq, gym, pygments
+chmod +x install.sh && ./install.sh
 ```
 
 ## Run
