@@ -18,7 +18,7 @@ pushing_nn_ensemble_model = DynamicsNNEnsemble(state_dim=2, action_dim=3, num_en
 GOOGLE_DRIVE_PATH = os.path.dirname(os.path.abspath(__file__))
 print("当前文件夹路径是：", GOOGLE_DRIVE_PATH)
 # 加载模型权重
-load_path = os.path.join(GOOGLE_DRIVE_PATH, 'data/dynamics_nn_ensemble_model.pt')
+load_path = os.path.join(GOOGLE_DRIVE_PATH, 'checkpoints/dynamics_nn_ensemble_model.pt')
 pushing_nn_ensemble_model.load_state_dict(torch.load(load_path))
 
 # 设置为 eval 模式
