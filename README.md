@@ -1,4 +1,4 @@
-# Dynamic_Neural_ode
+# Dynamic Neural ODE
 
 
 ## Installation
