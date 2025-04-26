@@ -68,17 +68,34 @@ class MultiStepLoss(nn.Module):
         """
         Compute the multi-step loss resultant of multi-querying the model from (state, action) and comparing the predictions with targets.
         """
-        multi_step_loss = None
-        # --- Your code here
         batch_size, num_steps = actions.shape[:2]
-        discounts = (self.discount ** torch.arange(num_steps))
-        pred_states = torch.empty((batch_size, num_steps+1, model.state_dim))
-        pred_states[:, 0] = state  
-        for t in range(num_steps):
-            current_state = pred_states[:, t]
-            pred_states[:, t+1] = model(current_state, actions[:, t])
-        errors = self.loss(pred_states[:, 1:], target_states) 
-        weighted_errors = errors * discounts[None, :]  
-        multi_step_loss = weighted_errors.sum()
+        device = state.device # Get device from input state
 
-        return multi_step_loss
+        # Ensure discounts are on the correct device
+        discounts = (self.discount ** torch.arange(num_steps).to(device))
+
+        multi_step_loss = 0.0
+        current_state = state # Initial state
+
+        # Rollout loop
+        for t in range(num_steps):
+            # Predict next state using the model
+            pred_next_state = model(current_state, actions[:, t])
+
+            # Calculate loss for the current step prediction vs target
+            # Assumes target_states has shape (B, num_steps, StateDim)
+            step_loss = self.loss(pred_next_state, target_states[:, t])
+
+            # Apply discount and accumulate
+            multi_step_loss += discounts[t] * step_loss
+
+            # Update current_state for the next iteration
+            # Use detach() if you DON'T want gradients flowing through predicted states
+            # across time steps (often desired in model-based RL rollouts,
+            # but maybe not for pure system ID depending on goal).
+            # Keep as is if you DO want gradients flowing through the whole sequence.
+            current_state = pred_next_state
+
+        # Return the total discounted loss (implicitly averaged by step_loss if loss_fn averages)
+        # Or divide by num_steps for average discounted loss per step
+        return multi_step_loss # / num_steps

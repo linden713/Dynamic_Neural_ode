@@ -324,6 +324,22 @@
         "documentation": {}
     },
     {
+        "label": "NeuralODEDynamicsModel",
+        "importPath": "model.neural_ODE_dynamics_models",
+        "description": "model.neural_ODE_dynamics_models",
+        "isExtraImport": true,
+        "detail": "model.neural_ODE_dynamics_models",
+        "documentation": {}
+    },
+    {
+        "label": "NeuralODEDynamicsModel",
+        "importPath": "model.neural_ODE_dynamics_models",
+        "description": "model.neural_ODE_dynamics_models",
+        "isExtraImport": true,
+        "detail": "model.neural_ODE_dynamics_models",
+        "documentation": {}
+    },
+    {
         "label": "GIFVisualizer",
         "importPath": "gif.visualizers",
         "description": "gif.visualizers",
@@ -428,7 +444,7 @@
         "kind": 6,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "class PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:\n            p.connect(p.GUI)\n        else:",
+        "peekOfCode": "class PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:\n            p.connect(p.GUI)\n        else:",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -446,7 +462,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "hw_dir = os.path.dirname(os.path.abspath(__file__))\nassets_dir = os.path.join(hw_dir, 'assets')\nBOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0., 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):",
+        "peekOfCode": "hw_dir = os.path.dirname(os.path.abspath(__file__))\nassets_dir = os.path.join(hw_dir, 'assets')\nBOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0, 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -455,7 +471,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "assets_dir = os.path.join(hw_dir, 'assets')\nBOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0., 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug",
+        "peekOfCode": "assets_dir = os.path.join(hw_dir, 'assets')\nBOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0, 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -464,7 +480,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "BOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0., 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer",
+        "peekOfCode": "BOX_SIZE = 0.1\nTARGET_POSE_FREE = np.array([0.8, 0, 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -473,7 +489,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "TARGET_POSE_FREE = np.array([0.8, 0., 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle",
+        "peekOfCode": "TARGET_POSE_FREE = np.array([0.8, 0, 0.])\nTARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -482,7 +498,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "TARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps",
+        "peekOfCode": "TARGET_POSE_OBSTACLES = np.array([0.8, -0.1, 0.])\nOBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -491,7 +507,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "OBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:",
+        "peekOfCode": "OBSTACLE_CENTRE = np.array([0.6, 0.2, 0.])\nOBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -500,7 +516,7 @@
         "kind": 5,
         "importPath": "env.panda_pushing_env",
         "description": "env.panda_pushing_env",
-        "peekOfCode": "OBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:\n            p.connect(p.GUI)",
+        "peekOfCode": "OBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])\nclass PandaPushingEnv(gym.Env): \n    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,\n                 render_every_n_steps=1, camera_heigh=84, camera_width=84):\n        self.debug = debug\n        self.visualizer = visualizer\n        self.include_obstacle = include_obstacle\n        self.render_every_n_steps = render_every_n_steps\n        if debug:\n            p.connect(p.GUI)",
         "detail": "env.panda_pushing_env",
         "documentation": {}
     },
@@ -554,7 +570,7 @@
         "kind": 6,
         "importPath": "model.losses",
         "description": "model.losses",
-        "peekOfCode": "class MultiStepLoss(nn.Module):\n    def __init__(self, loss_fn, discount=0.99):\n        super().__init__()\n        self.loss = loss_fn\n        self.discount = discount\n    def forward(self, model, state, actions, target_states):\n        \"\"\"\n        Compute the multi-step loss resultant of multi-querying the model from (state, action) and comparing the predictions with targets.\n        \"\"\"\n        multi_step_loss = None",
+        "peekOfCode": "class MultiStepLoss(nn.Module):\n    def __init__(self, loss_fn, discount=0.99):\n        super().__init__()\n        self.loss = loss_fn\n        self.discount = discount\n    def forward(self, model, state, actions, target_states):\n        \"\"\"\n        Compute the multi-step loss resultant of multi-querying the model from (state, action) and comparing the predictions with targets.\n        \"\"\"\n        batch_size, num_steps = actions.shape[:2]",
         "detail": "model.losses",
         "documentation": {}
     },
@@ -563,7 +579,7 @@
         "kind": 6,
         "importPath": "model.neural_ODE_dynamics_models",
         "description": "model.neural_ODE_dynamics_models",
-        "peekOfCode": "class ODEFunc(nn.Module):\n    def __init__(self, state_dim, action_dim):\n        super().__init__()\n        self.net = nn.Sequential(\n            nn.Linear(state_dim + action_dim, 64),\n            nn.Tanh(),\n            nn.Linear(64, 64),\n            nn.Tanh(),\n            nn.Linear(64, state_dim)\n        )",
+        "peekOfCode": "class ODEFunc(nn.Module):\n    def __init__(self, state_dim, action_dim):\n        super().__init__()\n        self.state_dim = state_dim \n        self.action_dim = action_dim\n        self.net = nn.Sequential(\n            nn.Linear(self.state_dim + self.action_dim,100),\n            nn.ReLU(),\n            nn.Linear(100, 100),\n            nn.ReLU(),",
         "detail": "model.neural_ODE_dynamics_models",
         "documentation": {}
     },
@@ -739,11 +755,38 @@
         "documentation": {}
     },
     {
+        "label": "MODEL",
+        "kind": 5,
+        "importPath": "eval",
+        "description": "eval",
+        "peekOfCode": "MODEL = \"neural_ode_dynamics_model\"\nMAX_STEPS = 20\nNUM_STEPS_TRAING = 4\n# init visualizer\nfig = plt.figure(figsize=(8,8))\nhfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None",
+        "detail": "eval",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_STEPS",
+        "kind": 5,
+        "importPath": "eval",
+        "description": "eval",
+        "peekOfCode": "MAX_STEPS = 20\nNUM_STEPS_TRAING = 4\n# init visualizer\nfig = plt.figure(figsize=(8,8))\nhfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":",
+        "detail": "eval",
+        "documentation": {}
+    },
+    {
+        "label": "NUM_STEPS_TRAING",
+        "kind": 5,
+        "importPath": "eval",
+        "description": "eval",
+        "peekOfCode": "NUM_STEPS_TRAING = 4\n# init visualizer\nfig = plt.figure(figsize=(8,8))\nhfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(",
+        "detail": "eval",
+        "documentation": {}
+    },
+    {
         "label": "fig",
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "fig = plt.figure(figsize=(8,8))\nhfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\n# 1. 先实例化模型\npushing_residual_dynamics_model = ResidualDynamicsModel(\n    env.observation_space.shape[0],\n    env.action_space.shape[0]\n)\n# 2. 再加载 state_dict",
+        "peekOfCode": "fig = plt.figure(figsize=(8,8))\nhfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(\n        env.observation_space.shape[0],\n        env.action_space.shape[0]",
         "detail": "eval",
         "documentation": {}
     },
@@ -752,7 +795,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "hfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\n# 1. 先实例化模型\npushing_residual_dynamics_model = ResidualDynamicsModel(\n    env.observation_space.shape[0],\n    env.action_space.shape[0]\n)\n# 2. 再加载 state_dict\nstate_dict = torch.load(\"checkpoint/pushing_multi_step_residual_dynamics_model.pt\")",
+        "peekOfCode": "hfig = display(fig, display_id=True)\nvisualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(\n        env.observation_space.shape[0],\n        env.action_space.shape[0]\n    )",
         "detail": "eval",
         "documentation": {}
     },
@@ -761,7 +804,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "visualizer = GIFVisualizer()\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\n# 1. 先实例化模型\npushing_residual_dynamics_model = ResidualDynamicsModel(\n    env.observation_space.shape[0],\n    env.action_space.shape[0]\n)\n# 2. 再加载 state_dict\nstate_dict = torch.load(\"checkpoint/pushing_multi_step_residual_dynamics_model.pt\")\npushing_residual_dynamics_model.load_state_dict(state_dict)",
+        "peekOfCode": "visualizer = GIFVisualizer()\n# load the model\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(\n        env.observation_space.shape[0],\n        env.action_space.shape[0]\n    )\n    state_dict = torch.load(f\"checkpoint/pushing_{NUM_STEPS_TRAING}_steps_ode_dynamics_model.pt\")",
         "detail": "eval",
         "documentation": {}
     },
@@ -770,25 +813,16 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "env = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\n# 1. 先实例化模型\npushing_residual_dynamics_model = ResidualDynamicsModel(\n    env.observation_space.shape[0],\n    env.action_space.shape[0]\n)\n# 2. 再加载 state_dict\nstate_dict = torch.load(\"checkpoint/pushing_multi_step_residual_dynamics_model.pt\")\npushing_residual_dynamics_model.load_state_dict(state_dict)\n# 3. 切换到评估模式",
+        "peekOfCode": "env = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=True,  camera_heigh=800, camera_width=800)\npushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(\n        env.observation_space.shape[0],\n        env.action_space.shape[0]\n    )\n    state_dict = torch.load(f\"checkpoint/pushing_{NUM_STEPS_TRAING}_steps_ode_dynamics_model.pt\")\n    pushing_neural_ode_dynamics_model.load_state_dict(state_dict)\n    pushing_model = pushing_neural_ode_dynamics_model.eval()",
         "detail": "eval",
         "documentation": {}
     },
     {
-        "label": "pushing_residual_dynamics_model",
+        "label": "pushing_model",
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "pushing_residual_dynamics_model = ResidualDynamicsModel(\n    env.observation_space.shape[0],\n    env.action_space.shape[0]\n)\n# 2. 再加载 state_dict\nstate_dict = torch.load(\"checkpoint/pushing_multi_step_residual_dynamics_model.pt\")\npushing_residual_dynamics_model.load_state_dict(state_dict)\n# 3. 切换到评估模式\npushing_residual_dynamics_model.eval()\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=False,  camera_heigh=800, camera_width=800, render_every_n_steps=5)",
-        "detail": "eval",
-        "documentation": {}
-    },
-    {
-        "label": "state_dict",
-        "kind": 5,
-        "importPath": "eval",
-        "description": "eval",
-        "peekOfCode": "state_dict = torch.load(\"checkpoint/pushing_multi_step_residual_dynamics_model.pt\")\npushing_residual_dynamics_model.load_state_dict(state_dict)\n# 3. 切换到评估模式\npushing_residual_dynamics_model.eval()\nenv = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=False,  camera_heigh=800, camera_width=800, render_every_n_steps=5)\ncontroller = PushingController(env, pushing_residual_dynamics_model, free_pushing_cost_function, num_samples=100, horizon=10)\nstate = env.reset()\nnum_steps_max = 20\nfor i in tqdm(range(num_steps_max)):\n    action = controller.control(state)",
+        "peekOfCode": "pushing_model = None\nif MODEL == \"neural_ode_dynamics_model\":\n    pushing_neural_ode_dynamics_model = NeuralODEDynamicsModel(\n        env.observation_space.shape[0],\n        env.action_space.shape[0]\n    )\n    state_dict = torch.load(f\"checkpoint/pushing_{NUM_STEPS_TRAING}_steps_ode_dynamics_model.pt\")\n    pushing_neural_ode_dynamics_model.load_state_dict(state_dict)\n    pushing_model = pushing_neural_ode_dynamics_model.eval()\nelif MODEL == \"residual_dynamics_model\":",
         "detail": "eval",
         "documentation": {}
     },
@@ -797,7 +831,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "env = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=False,  camera_heigh=800, camera_width=800, render_every_n_steps=5)\ncontroller = PushingController(env, pushing_residual_dynamics_model, free_pushing_cost_function, num_samples=100, horizon=10)\nstate = env.reset()\nnum_steps_max = 20\nfor i in tqdm(range(num_steps_max)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    if done:\n        break\n# Evaluate if goal is reached",
+        "peekOfCode": "env = PandaPushingEnv(visualizer=visualizer, render_non_push_motions=False,  camera_heigh=800, camera_width=800, render_every_n_steps=5)\n# load pushing controller - mppi\ncontroller = PushingController(env, pushing_model, free_pushing_cost_function, num_samples=100, horizon=10)\n# test the model\nstate = env.reset()\nstep = 0\nfor i in tqdm(range(MAX_STEPS)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    step += 1",
         "detail": "eval",
         "documentation": {}
     },
@@ -806,7 +840,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "controller = PushingController(env, pushing_residual_dynamics_model, free_pushing_cost_function, num_samples=100, horizon=10)\nstate = env.reset()\nnum_steps_max = 20\nfor i in tqdm(range(num_steps_max)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    if done:\n        break\n# Evaluate if goal is reached\nend_state = env.get_state()",
+        "peekOfCode": "controller = PushingController(env, pushing_model, free_pushing_cost_function, num_samples=100, horizon=10)\n# test the model\nstate = env.reset()\nstep = 0\nfor i in tqdm(range(MAX_STEPS)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    step += 1\n    if done:\n        break",
         "detail": "eval",
         "documentation": {}
     },
@@ -815,16 +849,16 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "state = env.reset()\nnum_steps_max = 20\nfor i in tqdm(range(num_steps_max)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    if done:\n        break\n# Evaluate if goal is reached\nend_state = env.get_state()\ntarget_state = TARGET_POSE_FREE",
+        "peekOfCode": "state = env.reset()\nstep = 0\nfor i in tqdm(range(MAX_STEPS)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    step += 1\n    if done:\n        break\n# evaluate if goal is reached\nend_state = env.get_state()",
         "detail": "eval",
         "documentation": {}
     },
     {
-        "label": "num_steps_max",
+        "label": "step",
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "num_steps_max = 20\nfor i in tqdm(range(num_steps_max)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    if done:\n        break\n# Evaluate if goal is reached\nend_state = env.get_state()\ntarget_state = TARGET_POSE_FREE\ngoal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) # evaluate only position, not orientation",
+        "peekOfCode": "step = 0\nfor i in tqdm(range(MAX_STEPS)):\n    action = controller.control(state)\n    state, reward, done, _ = env.step(action)\n    step += 1\n    if done:\n        break\n# evaluate if goal is reached\nend_state = env.get_state()\ntarget_state = TARGET_POSE_FREE",
         "detail": "eval",
         "documentation": {}
     },
@@ -833,7 +867,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "end_state = env.get_state()\ntarget_state = TARGET_POSE_FREE\ngoal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) # evaluate only position, not orientation\ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nvisualizer.get_gif() \nplt.close(fig)",
+        "peekOfCode": "end_state = env.get_state()\ntarget_state = TARGET_POSE_FREE\ngoal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) \ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nprint(f'GOAL DISTANCE: {goal_distance:.2f}')\nprint(f'NUMBER OF STEPS: {step}')\nvisualizer.get_gif() \nplt.close(fig)",
         "detail": "eval",
         "documentation": {}
     },
@@ -842,7 +876,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "target_state = TARGET_POSE_FREE\ngoal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) # evaluate only position, not orientation\ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nvisualizer.get_gif() \nplt.close(fig)",
+        "peekOfCode": "target_state = TARGET_POSE_FREE\ngoal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) \ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nprint(f'GOAL DISTANCE: {goal_distance:.2f}')\nprint(f'NUMBER OF STEPS: {step}')\nvisualizer.get_gif() \nplt.close(fig)",
         "detail": "eval",
         "documentation": {}
     },
@@ -851,7 +885,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "goal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) # evaluate only position, not orientation\ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nvisualizer.get_gif() \nplt.close(fig)",
+        "peekOfCode": "goal_distance = np.linalg.norm(end_state[:2]-target_state[:2]) \ngoal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nprint(f'GOAL DISTANCE: {goal_distance:.2f}')\nprint(f'NUMBER OF STEPS: {step}')\nvisualizer.get_gif() \nplt.close(fig)",
         "detail": "eval",
         "documentation": {}
     },
@@ -860,7 +894,7 @@
         "kind": 5,
         "importPath": "eval",
         "description": "eval",
-        "peekOfCode": "goal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nvisualizer.get_gif() \nplt.close(fig)",
+        "peekOfCode": "goal_reached = goal_distance < BOX_SIZE\nprint(f'GOAL REACHED: {goal_reached}')\nprint(f'GOAL DISTANCE: {goal_distance:.2f}')\nprint(f'NUMBER OF STEPS: {step}')\nvisualizer.get_gif() \nplt.close(fig)",
         "detail": "eval",
         "documentation": {}
     },
@@ -923,7 +957,7 @@
         "kind": 2,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "def train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n        Loss needs to be MSE loss.\n    \"\"\"\n    train_loss = 0. # TODO: Modify the value",
+        "peekOfCode": "def train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n        Loss needs to be MSE loss.\n    \"\"\"\n    train_loss = 0. ",
         "detail": "train",
         "documentation": {}
     },
@@ -932,7 +966,7 @@
         "kind": 2,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "def val_step(model, val_loader) -> float:\n    \"\"\"\n    Perfoms an epoch of model performance validation\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: val_loss <float> representing the average loss among the different mini-batches\n    \"\"\"\n    val_loss = 0. # TODO: Modify the value\n    # Initialize the validation loop",
+        "peekOfCode": "def val_step(model, val_loader) -> float:\n    \"\"\"\n    Perfoms an epoch of model performance validation\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: val_loss <float> representing the average loss among the different mini-batches\n    \"\"\"\n    val_loss = 0. \n    # Initialize the validation loop",
         "detail": "train",
         "documentation": {}
     },
@@ -946,56 +980,11 @@
         "documentation": {}
     },
     {
-        "label": "pushing_multistep_residual_dynamics_model",
+        "label": "MODEL",
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "pushing_multistep_residual_dynamics_model = None\ncollected_data = np.load(\"collected_data.npy\", allow_pickle=True)  # 改成你的路径\ntrain_loader, val_loader = process_data_multiple_step(collected_data, batch_size=500)\npose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)\npose_loss = MultiStepLoss(pose_loss, discount=0.9)\nenv = PandaPushingEnv()\nenv.reset()\n# --- Your code here\npushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001",
-        "detail": "train",
-        "documentation": {}
-    },
-    {
-        "label": "collected_data",
-        "kind": 5,
-        "importPath": "train",
-        "description": "train",
-        "peekOfCode": "collected_data = np.load(\"collected_data.npy\", allow_pickle=True)  # 改成你的路径\ntrain_loader, val_loader = process_data_multiple_step(collected_data, batch_size=500)\npose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)\npose_loss = MultiStepLoss(pose_loss, discount=0.9)\nenv = PandaPushingEnv()\nenv.reset()\n# --- Your code here\npushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001\nNUM_EPOCHS = 5000",
-        "detail": "train",
-        "documentation": {}
-    },
-    {
-        "label": "pose_loss",
-        "kind": 5,
-        "importPath": "train",
-        "description": "train",
-        "peekOfCode": "pose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)\npose_loss = MultiStepLoss(pose_loss, discount=0.9)\nenv = PandaPushingEnv()\nenv.reset()\n# --- Your code here\npushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001\nNUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:",
-        "detail": "train",
-        "documentation": {}
-    },
-    {
-        "label": "pose_loss",
-        "kind": 5,
-        "importPath": "train",
-        "description": "train",
-        "peekOfCode": "pose_loss = MultiStepLoss(pose_loss, discount=0.9)\nenv = PandaPushingEnv()\nenv.reset()\n# --- Your code here\npushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001\nNUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:\nfig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))",
-        "detail": "train",
-        "documentation": {}
-    },
-    {
-        "label": "env",
-        "kind": 5,
-        "importPath": "train",
-        "description": "train",
-        "peekOfCode": "env = PandaPushingEnv()\nenv.reset()\n# --- Your code here\npushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001\nNUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:\nfig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))\naxes[0].plot(train_losses)",
-        "detail": "train",
-        "documentation": {}
-    },
-    {
-        "label": "pushing_multistep_residual_dynamics_model",
-        "kind": 5,
-        "importPath": "train",
-        "description": "train",
-        "peekOfCode": "pushing_multistep_residual_dynamics_model = ResidualDynamicsModel(env.observation_space.shape[0], env.action_space.shape[0])\nLR = 0.0001\nNUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:\nfig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))\naxes[0].plot(train_losses)\naxes[0].grid()\naxes[0].set_title('Train Loss')\naxes[0].set_xlabel('Epochs')",
+        "peekOfCode": "MODEL = \"ode\"\nLR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module",
         "detail": "train",
         "documentation": {}
     },
@@ -1004,7 +993,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "LR = 0.0001\nNUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:\nfig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))\naxes[0].plot(train_losses)\naxes[0].grid()\naxes[0].set_title('Train Loss')\naxes[0].set_xlabel('Epochs')\naxes[0].set_ylabel('Train Loss')",
+        "peekOfCode": "LR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader",
         "detail": "train",
         "documentation": {}
     },
@@ -1013,7 +1002,34 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "NUM_EPOCHS = 5000\ntrain_losses, val_losses = train_model(pushing_multistep_residual_dynamics_model, train_loader, val_loader, num_epochs=NUM_EPOCHS, lr=LR)\n# plot train loss and test loss:\nfig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))\naxes[0].plot(train_losses)\naxes[0].grid()\naxes[0].set_title('Train Loss')\naxes[0].set_xlabel('Epochs')\naxes[0].set_ylabel('Train Loss')\naxes[0].set_yscale('log')",
+        "peekOfCode": "NUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer",
+        "detail": "train",
+        "documentation": {}
+    },
+    {
+        "label": "NUM_STEPS",
+        "kind": 5,
+        "importPath": "train",
+        "description": "train",
+        "peekOfCode": "NUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: train_loss <float> representing the average loss among the different mini-batches.",
+        "detail": "train",
+        "documentation": {}
+    },
+    {
+        "label": "BATCH_SIZE",
+        "kind": 5,
+        "importPath": "train",
+        "description": "train",
+        "peekOfCode": "BATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n        Loss needs to be MSE loss.",
+        "detail": "train",
+        "documentation": {}
+    },
+    {
+        "label": "DEVICE",
+        "kind": 5,
+        "importPath": "train",
+        "description": "train",
+        "peekOfCode": "DEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\ndef train_step(model, train_loader, optimizer) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n        Loss needs to be MSE loss.\n    \"\"\"",
         "detail": "train",
         "documentation": {}
     }

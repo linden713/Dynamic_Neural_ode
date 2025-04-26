@@ -173,5 +173,9 @@ class MultiStepDynamicsDataset(Dataset):
         sample['state'] = self.data[trajectory_item]['states'][item]
         sample['next_state'] = np.stack([self.data[trajectory_item]['states'][item+1+i] for i in range(self.num_steps)])
         sample['action'] = np.stack([self.data[trajectory_item]['actions'][item+i] for i in range(self.num_steps)])
+        
+        sample['state'] = torch.as_tensor(sample['state'], device='cuda:0', dtype=torch.float32)
+        sample['next_state'] = torch.as_tensor(sample['next_state'], device='cuda:0', dtype=torch.float32)
+        sample['action'] = torch.as_tensor(sample['action'], device='cuda:0', dtype=torch.float32)
         # ---
         return sample 

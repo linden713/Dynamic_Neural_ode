@@ -3,17 +3,17 @@ import torch.nn as nn
 from torchdiffeq import odeint
 
 
-#GPT 随便生成的
-
 class ODEFunc(nn.Module):
     def __init__(self, state_dim, action_dim):
         super().__init__()
+        self.state_dim = state_dim 
+        self.action_dim = action_dim
         self.net = nn.Sequential(
-            nn.Linear(state_dim + action_dim, 64),
-            nn.Tanh(),
-            nn.Linear(64, 64),
-            nn.Tanh(),
-            nn.Linear(64, state_dim)
+            nn.Linear(self.state_dim + self.action_dim,100),
+            nn.ReLU(),
+            nn.Linear(100, 100),
+            nn.ReLU(),
+            nn.Linear(100, self.state_dim)
         )
 
     def forward(self, t, x_aug):
