@@ -413,7 +413,7 @@ def main():
                  console.print(f"[yellow]Skipping results storage for [magenta]{model_name}[/] ({num_steps_train} steps) due to evaluation error.[/]")
 
     # --- Final Summary ---
-    console.print(f"\n[bold underline bright_white]Final Evaluation Summary[/]")
+    console.print(f"\n[bold underline red]Final Evaluation Summary[/]")
     if results:
         # Sort results for consistent display order (by model, then steps)
         sorted_results = sorted(results.items(), key=lambda item: (item[0][0], item[0][1]))
