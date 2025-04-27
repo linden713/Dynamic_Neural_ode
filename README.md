@@ -8,7 +8,7 @@ conda activate rob_learning
 ```
 
 ```shell
-pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet
+pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet pandas
 ```
 or
 ```shell

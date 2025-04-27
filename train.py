@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
-
+import pandas as pd
 from model.losses import MultiStepLoss, SE2PoseLoss
 from datasets import process_data_multiple_step
 from tqdm import tqdm
@@ -12,8 +12,8 @@ from model.neural_ODE_dynamics_models import NeuralODEDynamicsModel
 import os
 
 # parameters
-MODEL = "residual" 
-# MODEL = "ode"
+# MODEL = "residual" 
+MODEL = "ode"
 LR = 0.0001
 NUM_EPOCHS = 3000
 NUM_STEPS = 4
@@ -21,7 +21,7 @@ BATCH_SIZE = 500
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CHECKPOINT_DIR = "checkpoint" 
 PLOT_DIR = "media/plots"
-    
+NUM_STEPS_LIST = [1, 2, 3, 5]
 def train_step(model, train_loader, optimizer, loss_fn) -> float:
     """
     Performs an epoch train step.
@@ -118,56 +118,70 @@ def train_model(model, train_dataloader, val_dataloader, loss_fn, save_path, num
 
 
 if __name__ == "__main__":
-    # load data
-    pushing_multistep_residual_dynamics_model = None
-    collected_data = np.load("data/collected_data.npy", allow_pickle=True) 
-    train_loader, val_loader = process_data_multiple_step(collected_data, 
-                                                          batch_size=BATCH_SIZE, 
-                                                          num_steps=NUM_STEPS)
-
-    # loss function
-    pose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)
-    pose_loss = MultiStepLoss(pose_loss, discount=0.9)
-
-    # create model
-    env = PandaPushingEnv()
-    env.reset()
-    state_dim, action_dim = env.observation_space.shape[0], env.action_space.shape[0]
-    if MODEL == "ode":
-        dynamics_model = NeuralODEDynamicsModel(state_dim, action_dim).to(DEVICE)
-    elif MODEL == "residual":
-        dynamics_model = ResidualDynamicsModel(state_dim, action_dim).to(DEVICE)
-    print(f"Created model: {MODEL}")
     
-    # Define save path for the best model
-    model_save_path = os.path.join(CHECKPOINT_DIR, f'{MODEL}/pushing_{NUM_STEPS}_steps_{MODEL}_dynamics_model.pt')
-    plot_save_path = os.path.join(PLOT_DIR, f'{MODEL}/train_val_loss_{MODEL}_{NUM_STEPS}_steps.png')
+    for NUM_STEPS in NUM_STEPS_LIST:
+        # load data
+        pushing_multistep_residual_dynamics_model = None
+        collected_data = np.load("data/collected_data.npy", allow_pickle=True) 
+        train_loader, val_loader = process_data_multiple_step(collected_data, 
+                                                            batch_size=BATCH_SIZE, 
+                                                            num_steps=NUM_STEPS)
 
-    # training
-    train_losses, val_losses = train_model(dynamics_model,
-                                           train_loader,
-                                           val_loader,
-                                           loss_fn=pose_loss, # Pass the loss function
-                                           save_path=model_save_path, # Pass the save path
-                                           num_epochs=NUM_EPOCHS,
-                                           lr=LR
-                                           )
+        # loss function
+        pose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)
+        pose_loss = MultiStepLoss(pose_loss, discount=0.9)
 
-    # save model
-    torch.save(dynamics_model.state_dict(), model_save_path)
-    
-    # plot train loss and test loss
-    plt.figure(figsize=(10, 5)) # Create a single figure
-    plt.plot(train_losses, label='Train Loss')
-    plt.plot(val_losses, label='Validation Loss')
-    plt.yscale('log') # Use log scale for y-axis
-    plt.title(f'Training & Validation Loss ({MODEL}, {NUM_STEPS} steps)')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss (Log Scale)')
-    plt.legend() # Show legend
-    plt.grid(True)
-    plt.savefig(plot_save_path) # Save the plot to the plots directory
-    print(f"Loss plot saved to: {plot_save_path}")
-    plt.show() # Display the plot
+        # create model
+        env = PandaPushingEnv()
+        env.reset()
+        state_dim, action_dim = env.observation_space.shape[0], env.action_space.shape[0]
+        if MODEL == "ode":
+            dynamics_model = NeuralODEDynamicsModel(state_dim, action_dim).to(DEVICE)
+        elif MODEL == "residual":
+            dynamics_model = ResidualDynamicsModel(state_dim, action_dim).to(DEVICE)
+        print(f"Created model: {MODEL}")
+        
+        # Define save path for the model
+        model_save_path = os.path.join(CHECKPOINT_DIR, f'{MODEL}/pushing_{NUM_STEPS}_steps_{MODEL}_dynamics_model.pt')
+        plot_save_path = os.path.join(PLOT_DIR, f'{MODEL}/train_val_loss_{MODEL}_{NUM_STEPS}_steps.png')
+        csv_save_path = os.path.join(PLOT_DIR, f'loss_history_{MODEL}_{NUM_STEPS}_steps.csv') # Define CSV path
+        
+        # training
+        train_losses, val_losses = train_model(dynamics_model,
+                                            train_loader,
+                                            val_loader,
+                                            loss_fn=pose_loss, # Pass the loss function
+                                            save_path=model_save_path, # Pass the save path
+                                            num_epochs=NUM_EPOCHS,
+                                            lr=LR
+                                            )
+
+        # save model
+        torch.save(dynamics_model.state_dict(), model_save_path)
+        # save csv 
+        loss_data = {
+            'epoch': list(range(1, len(train_losses) + 1)), # Epoch numbers (starting from 1)
+            'train_loss': train_losses,
+            'validation_loss': val_losses
+        }
+        loss_df = pd.DataFrame(loss_data)
+        
+        # Save to CSV
+        loss_df.to_csv(csv_save_path, index=False) 
+        print(f"Loss history saved to: {csv_save_path}")
+        
+        # plot train loss and test loss
+        plt.figure(figsize=(10, 5)) # Create a single figure
+        plt.plot(train_losses, label='Train Loss')
+        plt.plot(val_losses, label='Validation Loss')
+        plt.yscale('log') # Use log scale for y-axis
+        plt.title(f'Training & Validation Loss ({MODEL}, {NUM_STEPS} steps)')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss (Log Scale)')
+        plt.legend() # Show legend
+        plt.grid(True)
+        plt.savefig(plot_save_path) # Save the plot to the plots directory
+        print(f"Loss plot saved to: {plot_save_path}")
+        # plt.show() # Display the plot
 
     

@@ -3,7 +3,7 @@
 echo "Installing dependencies for the project..."
 
 # Install dependencies for the project
-pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet
+pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet pandas
 
 
 echo "Installing dependencies for the project completed."

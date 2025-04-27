@@ -415,6 +415,15 @@
         "documentation": {}
     },
     {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
         "label": "MultiStepLoss",
         "importPath": "model.losses",
         "description": "model.losses",
@@ -993,7 +1002,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "MODEL = \"residual\" \n# MODEL = \"ode\"\nLR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:",
+        "peekOfCode": "MODEL = \"ode\"\nLR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:",
         "detail": "train",
         "documentation": {}
     },
@@ -1002,7 +1011,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "LR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.",
+        "peekOfCode": "LR = 0.0001\nNUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"",
         "detail": "train",
         "documentation": {}
     },
@@ -1011,7 +1020,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "NUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module",
+        "peekOfCode": "NUM_EPOCHS = 3000\nNUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.",
         "detail": "train",
         "documentation": {}
     },
@@ -1020,7 +1029,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "NUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader",
+        "peekOfCode": "NUM_STEPS = 4\nBATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module",
         "detail": "train",
         "documentation": {}
     },
@@ -1029,7 +1038,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "BATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer",
+        "peekOfCode": "BATCH_SIZE = 500\nDEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader",
         "detail": "train",
         "documentation": {}
     },
@@ -1038,7 +1047,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "DEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.",
+        "peekOfCode": "DEVICE = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\nCHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer",
         "detail": "train",
         "documentation": {}
     },
@@ -1047,7 +1056,7 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "CHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.\n    :return: train_loss <float> representing the average loss among the different mini-batches.",
+        "peekOfCode": "CHECKPOINT_DIR = \"checkpoint\" \nPLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.",
         "detail": "train",
         "documentation": {}
     },
@@ -1056,7 +1065,16 @@
         "kind": 5,
         "importPath": "train",
         "description": "train",
-        "peekOfCode": "PLOT_DIR = \"media/plots\"\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n    \"\"\"",
+        "peekOfCode": "PLOT_DIR = \"media/plots\"\nNUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.\n    :return: train_loss <float> representing the average loss among the different mini-batches.",
+        "detail": "train",
+        "documentation": {}
+    },
+    {
+        "label": "NUM_STEPS_LIST",
+        "kind": 5,
+        "importPath": "train",
+        "description": "train",
+        "peekOfCode": "NUM_STEPS_LIST = [1, 2, 3, 5]\ndef train_step(model, train_loader, optimizer, loss_fn) -> float:\n    \"\"\"\n    Performs an epoch train step.\n    :param model: Pytorch nn.Module\n    :param train_loader: Pytorch DataLoader\n    :param optimizer: Pytorch optimizer\n    :param loss_fn: The loss function to use.\n    :return: train_loss <float> representing the average loss among the different mini-batches.\n    \"\"\"",
         "detail": "train",
         "documentation": {}
     }
