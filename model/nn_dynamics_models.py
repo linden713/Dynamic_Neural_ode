@@ -15,9 +15,9 @@ class ResidualDynamicsModel(nn.Module):
         # --- Your code here
         self.net = nn.Sequential(
             nn.Linear(self.state_dim + self.action_dim, 100),
-            nn.ReLU(),
+            nn.Tanh(),
             nn.Linear(100, 100),
-            nn.ReLU(),
+            nn.Tanh(),
             nn.Linear(100, self.state_dim)
         )
         # ---
