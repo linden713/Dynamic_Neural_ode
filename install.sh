@@ -27,7 +27,7 @@ conda activate rob_learning
 
 echo "📦 Installing Python packages..."
 
-pip install torch torchdiffeq tqdm numpy matplotlib gym pybullet ipython numpngw
+pip install torch torchdiffeq tqdm numpy matplotlib gym pybullet ipython numpngw pytz
 
 echo "🎉 All dependencies installed successfully!"
 echo "## Follow the instructions in the README to run the project. ##"

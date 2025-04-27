@@ -263,6 +263,7 @@ class MPPI():
         for t in range(T):
             u = self.u_scale * perturbed_actions[:, t].repeat(self.M, 1, 1)
             state = self._dynamics(state, u, t)
+            state = state.detach()
             c = self._running_cost(state, u)
             cost_samples += c
             if self.M > 1:

@@ -142,7 +142,11 @@ class PandaPushingEnv(gym.Env):
         # check that the action is valid
         is_action_valid = self.check_action_valid(action)
         if not is_action_valid:
-            raise AttributeError(f'Action {action} is not valid. Make sure you provide an action within the action space limits.')
+            print(f'Action {action} is not valid. Make sure you provide an action within the action space limits.')
+            action_space = spaces.Box(low=np.array([-1, -np.pi * 0.5, 0], dtype=np.float32),
+                                       high=np.array([1, np.pi * 0.5, 1], dtype=np.float32))
+            action = np.clip(action, action_space.low, action_space.high)
+
         self.episode_step_counter += 1
         # Enable smooth motion of the robot arm
         p.configureDebugVisualizer(p.COV_ENABLE_SINGLE_STEP_RENDERING)
