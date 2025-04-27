@@ -27,7 +27,7 @@ OBSTACLE_HALFDIMS = np.array([0.05, 0.25, 0.05])
 
 class PandaPushingEnv(gym.Env): 
 
-    def __init__(self, debug=False, visualizer=None, include_obstacle=True, render_non_push_motions=True,
+    def __init__(self, debug=False, visualizer=None, include_obstacle=False, render_non_push_motions=True,
                  render_every_n_steps=1, camera_heigh=84, camera_width=84):
         self.debug = debug
         self.visualizer = visualizer
