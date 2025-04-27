@@ -1,9 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 echo "Installing dependencies for the project..."
 
-# Install dependencies for the project
-pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet
+conda create -n rob_learning python=3.10 -y
+
+source $(conda info --base)/etc/profile.d/conda.sh
+conda activate rob_learning
+
+pip install torch torchdiffeq tqdm numpy matplotlib gym pybullet ipython numpngw
+
 
 
 echo "Installing dependencies for the project completed."

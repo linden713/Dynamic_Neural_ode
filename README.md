@@ -1,19 +1,7 @@
 ## Installation
-```shell
-conda creat -n rob_learning python=3.10
-```
 
 ```shell
-conda activate rob_learning
-```
-
-```shell
-pip3 install pytorch torchdiffeq tqdm numpy matplotlib gym pybullet
-```
-or
-```shell
-chmod +x install.sh
-./install.sh
+chmod +x install.sh && ./install.sh
 ```
 
 ## Collect Dataset

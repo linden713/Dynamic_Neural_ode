@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from IPython.display import display
 from model.nn_dynamics_models import ResidualDynamicsModel
 from model.neural_ODE_dynamics_models import NeuralODEDynamicsModel
@@ -30,7 +30,7 @@ if MODEL == "neural_ode_dynamics_model":
         env.observation_space.shape[0],
         env.action_space.shape[0]
     )
-    state_dict = torch.load(f"checkpoint/pushing_{NUM_STEPS_TRAING}_steps_ode_dynamics_model.pt")
+    state_dict = torch.load(f"checkpoint/ode/pushing_{NUM_STEPS_TRAING}_steps_ode_dynamics_model.pt")
     pushing_neural_ode_dynamics_model.load_state_dict(state_dict)
     pushing_model = pushing_neural_ode_dynamics_model.eval()
     
@@ -39,7 +39,7 @@ elif MODEL == "residual_dynamics_model":
         env.observation_space.shape[0],
         env.action_space.shape[0]
     )
-    state_dict = torch.load(f"checkpoint/pushing_{NUM_STEPS_TRAING}_steps_residual_dynamics_model.pt")
+    state_dict = torch.load(f"checkpoint/residual/pushing_{NUM_STEPS_TRAING}_steps_residual_dynamics_model.pt")
     pushing_residual_dynamics_model.load_state_dict(state_dict)
     pushing_model = pushing_residual_dynamics_model.eval()
 
