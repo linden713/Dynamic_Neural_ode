@@ -21,7 +21,7 @@
 echo "=========================================="
 echo "📦 Installing Python packages..."
 
-pip install torch torchdiffeq tqdm numpy matplotlib gym pybullet ipython numpngw pytz
+pip install torch torchdiffeq tqdm numpy matplotlib gym pybullet ipython numpngw pytz rich
 
 echo "🎉 All dependencies installed successfully!"
 echo "=========================================="

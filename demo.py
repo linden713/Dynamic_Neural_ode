@@ -22,7 +22,7 @@ MAX_STEPS_PER_EPISODE = 20
 ENABLE_GIF_GENERATION = True         # Flag to enable/disable GIF saving
 GIF_SAVE_DIR = "gif"                 # Directory to save GIFs
 CHECKPOINT_BASE_DIR = "checkpoint"   # Base directory for model checkpoints
-INCLUDE_OBSTACLE = True
+INCLUDE_OBSTACLE = False
 
 # --- Rich Console Initialization ---
 console = Console()
@@ -76,7 +76,7 @@ class GIFVisualizer:
             import numpngw # Lazy import if only used here
             # Delay is inter-frame delay in ms
             numpngw.write_apng(filename, self.frames, delay=100)
-            console.print(f"\r[green]Successfully saved animation [bold white]'{filename}'[/]!      [/]")
+            console.print(f"\r[green]  Successfully saved animation [bold red]'{filename}'[/]!      [/]")
         except ImportError:
              console.print(f"\r[bold red]Error:[/] [red]Package 'numpngw' not found. Cannot save APNG. Install: pip install numpngw[/]")
              return None
@@ -116,10 +116,10 @@ def evaluate_model(model_name: str, num_steps_train: int, config: dict) -> tuple
     if use_gif:
         ensure_dir(gif_dir)
         visualizer = GIFVisualizer()
-        console.print(f"[dim]GIF generation enabled.[/]")
+        console.print(f"[green]GIF generation enabled.[/]")
 
     # --- Load Environment ---
-    console.print(f"[dim]Loading environment...[/]", end='')
+    # console.print(f"[dim]Loading environment...[/]", end='')
     try:
         env = PandaPushingEnv(
             visualizer=visualizer,
@@ -134,7 +134,7 @@ def evaluate_model(model_name: str, num_steps_train: int, config: dict) -> tuple
         return None, None
 
     # --- Load Model ---
-    console.print(f"[dim]Loading model state...[/]", end='')
+    # console.print(f"[dim]Loading model state...[/]", end='')
     model_file_prefix = f"pushing_{num_steps_train}_steps"
     model_path = "" # Initialize model_path
     try:
@@ -158,7 +158,7 @@ def evaluate_model(model_name: str, num_steps_train: int, config: dict) -> tuple
         ensure_dir(os.path.dirname(model_path))
         # Load the trained model state
         model.load_state_dict(torch.load(model_path))
-        console.print(f"\r[green]Model state loaded from [italic]{model_path}[/].[/]")
+        console.print(f"\r[green]Model loaded from [italic]{model_path}[/].[/]")
     except FileNotFoundError:
         console.print(f"\r[bold red]Error:[/] [red] Model file not found at [italic]{model_path}[/]. Ensure checkpoints exist.[/]")
         return None, None
@@ -169,7 +169,7 @@ def evaluate_model(model_name: str, num_steps_train: int, config: dict) -> tuple
     model = model.eval() # Set model to evaluation mode
 
     # --- Initialize Controller ---
-    console.print(f"[dim]Initializing controller...[/]", end='')
+    # console.print(f"[dim]Initializing controller...[/]", end='')
     try:
         # Using Model Predictive Control (MPC) with the loaded dynamics model
         controller = PushingController(
@@ -240,7 +240,7 @@ def evaluate_model(model_name: str, num_steps_train: int, config: dict) -> tuple
                 if use_gif and visualizer and not gif_saved_for_this_run:
                     gif_filename = os.path.join(gif_dir, f"{model_name}_{num_steps_train}steps_success.gif")
                     # Print GIF saving message *outside* the progress bar context
-                    progress.console.print(f"  [green]Saving successful GIF to [bold white]'{gif_filename}'[/][/]")
+                    progress.console.print(f"  [green]Saving successful GIF to [bold red]'{gif_filename}'[/][/]")
                     visualizer.get_gif(gif_filename) # Generate and save the GIF
                     gif_saved_for_this_run = True # Mark that GIF has been saved
             else:
@@ -365,7 +365,7 @@ def plot_results(results: dict, num_steps_list: list, models: list, max_steps_pe
     plot_filename = "evaluation_summary_plot.png"
     try:
         plt.savefig(plot_filename) # Save the plot to a file
-        console.print(f"\n[green]Plot saved as [bold white]'{plot_filename}'[/][/]")
+        console.print(f"\n[green]Plot saved as [bold red]'{plot_filename}'[/][/]")
         plt.show() # Display the plot interactively
     except Exception as e:
         console.print(f"[bold red]Error saving/showing plot '{plot_filename}': {e}[/]")
