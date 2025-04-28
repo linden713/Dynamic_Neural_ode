@@ -1,0 +1,44 @@
+### Free Space
+Final Evaluation Summary
+ ODE Dopri5      Steps: 1  -> Success: 100.00%, Avg Steps:   8.20
+ ODE Dopri5      Steps: 2  -> Success: 100.00%, Avg Steps:   7.80
+ ODE Dopri5      Steps: 3  -> Success: 100.00%, Avg Steps:   8.80
+ ODE Dopri5      Steps: 4  -> Success: 100.00%, Avg Steps:   8.60
+ ODE Dopri5      Steps: 5  -> Success: 100.00%, Avg Steps:   9.00
+ ODE Euler       Steps: 1  -> Success: 100.00%, Avg Steps:   8.40
+ ODE Euler       Steps: 2  -> Success: 100.00%, Avg Steps:   7.60
+ ODE Euler       Steps: 3  -> Success: 100.00%, Avg Steps:  11.00
+ ODE Euler       Steps: 4  -> Success: 100.00%, Avg Steps:   6.80
+ ODE Euler       Steps: 5  -> Success: 100.00%, Avg Steps:  11.80
+ ODE Rk4         Steps: 1  -> Success: 100.00%, Avg Steps:   8.00
+ ODE Rk4         Steps: 2  -> Success: 100.00%, Avg Steps:   6.20
+ ODE Rk4         Steps: 3  -> Success: 100.00%, Avg Steps:  10.80
+ ODE Rk4         Steps: 4  -> Success: 100.00%, Avg Steps:   8.40
+ ODE Rk4         Steps: 5  -> Success: 100.00%, Avg Steps:  10.80
+ Residual        Steps: 1  -> Success: 100.00%, Avg Steps:  14.00
+ Residual        Steps: 2  -> Success: 100.00%, Avg Steps:  13.60
+ Residual        Steps: 3  -> Success: 100.00%, Avg Steps:   9.60
+ Residual        Steps: 4  -> Success: 100.00%, Avg Steps:  12.60
+ Residual        Steps: 5  -> Success:  80.00%, Avg Steps:  15.00
+
+ ### Obstacle
+ ODE Dopri5      Steps: 1  -> Success:  20.00%, Avg Steps:  17.50
+ ODE Dopri5      Steps: 2  -> Success:  30.00%, Avg Steps:  17.40
+ ODE Dopri5      Steps: 3  -> Success:  40.00%, Avg Steps:  20.00
+ ODE Dopri5      Steps: 4  -> Success:  20.00%, Avg Steps:  17.80
+ ODE Dopri5      Steps: 5  -> Success:  20.00%, Avg Steps:  18.30
+ ODE Euler       Steps: 1  -> Success:  20.00%, Avg Steps:  18.30
+ ODE Euler       Steps: 2  -> Success:  20.00%, Avg Steps:  18.00
+ ODE Euler       Steps: 3  -> Success:  30.00%, Avg Steps:  20.00
+ ODE Euler       Steps: 4  -> Success:  10.00%, Avg Steps:  16.40
+ ODE Euler       Steps: 5  -> Success:   0.00%, Avg Steps:  18.60
+ ODE Rk4         Steps: 1  -> Success:  10.00%, Avg Steps:  18.20
+ ODE Rk4         Steps: 2  -> Success:  10.00%, Avg Steps:  17.20
+ ODE Rk4         Steps: 3  -> Success:  40.00%, Avg Steps:  18.60
+ ODE Rk4         Steps: 4  -> Success:  10.00%, Avg Steps:  19.60
+ ODE Rk4         Steps: 5  -> Success:  10.00%, Avg Steps:  19.40
+ Residual        Steps: 1  -> Success:   0.00%, Avg Steps:  20.00
+ Residual        Steps: 2  -> Success:  10.00%, Avg Steps:  18.80
+ Residual        Steps: 3  -> Success:  10.00%, Avg Steps:  20.00
+ Residual        Steps: 4  -> Success:  30.00%, Avg Steps:  18.10
+ Residual        Steps: 5  -> Success:  10.00%, Avg Steps:  19.90

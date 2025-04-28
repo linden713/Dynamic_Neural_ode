@@ -2,80 +2,99 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-# --- Data Provided ---
-# Parsed from the user's text summary
-## == free space ==
-results_data = {
-    ("Neural Ode", 1): (1, 12.6),
-    ("Neural Ode", 2): (1, 7.6),
-    ("Neural Ode", 3): (1, 5.4),
-    ("Neural Ode", 4): (1, 8.6),
-    ("Neural Ode", 5): (1, 7.8),
-    ("Residual", 1): (1, 7.8),
-    ("Residual", 2): (1, 8.4),
-    ("Residual", 3): (1, 12.6),
-    ("Residual", 4): (1, 10.8),
-    ("Residual", 5): (1, 9.8),
-}
-
-## == obstacle ==
+# --- Data Provided (From previous step) ---
+## free space
 # results_data = {
-#     ("Neural Ode", 1): (0.20, 17.50),
-#     ("Neural Ode", 2): (0.30, 17.40),
-#     ("Neural Ode", 3): (0.40, 20.00),
-#     ("Neural Ode", 4): (0.20, 17.80),
-#     ("Neural Ode", 5): (0.20, 18.30),
-#     ("Residual", 1): (0.00, 20.00),
-#     ("Residual", 2): (0.10, 18.80),
-#     ("Residual", 3): (0.10, 20.00),
-#     ("Residual", 4): (0.30, 18.10),
-#     ("Residual", 5): (0.10, 19.90),
+#     # ODE Dopri5
+#     ("ODE Dopri5", 1): (1.00, 8.20),
+#     ("ODE Dopri5", 2): (1.00, 7.80),
+#     ("ODE Dopri5", 3): (1.00, 8.80),
+#     ("ODE Dopri5", 4): (1.00, 8.60),
+#     ("ODE Dopri5", 5): (1.00, 9.00),
+#     # ODE Euler
+#     ("ODE Euler", 1): (1.00, 8.40),
+#     ("ODE Euler", 2): (1.00, 7.60),
+#     ("ODE Euler", 3): (1.00, 11.00),
+#     ("ODE Euler", 4): (1.00, 6.80),
+#     ("ODE Euler", 5): (1.00, 11.80),
+#     # ODE Rk4
+#     ("ODE Rk4", 1): (1.00, 8.00),
+#     ("ODE Rk4", 2): (1.00, 6.20),
+#     ("ODE Rk4", 3): (1.00, 10.80),
+#     ("ODE Rk4", 4): (1.00, 8.40),
+#     ("ODE Rk4", 5): (1.00, 10.80),
+#     # Residual
+#     ("Residual", 1): (1.00, 14.00),
+#     ("Residual", 2): (1.00, 13.60),
+#     ("Residual", 3): (1.00, 9.60),
+#     ("Residual", 4): (1.00, 12.60),
+#     ("Residual", 5): (0.80, 15.00),
 # }
 
+## obstacle
+results_data = {
+    # ODE Dopri5
+    ("ODE Dopri5", 1): (0.20, 17.50),
+    ("ODE Dopri5", 2): (0.30, 17.40), 
+    ("ODE Dopri5", 3): (0.40, 20.00), 
+    ("ODE Dopri5", 4): (0.20, 17.80), 
+    ("ODE Dopri5", 5): (0.20, 18.30), 
+    # ODE Euler
+    ("ODE Euler", 1): (0.20, 18.30), 
+    ("ODE Euler", 2): (0.20, 18.00),  
+    ("ODE Euler", 3): (0.30, 20.00),  
+    ("ODE Euler", 4): (0.10, 16.40),  
+    ("ODE Euler", 5): (0.00, 18.60),  
+    # ODE Rk4
+    ("ODE Rk4", 1): (0.10, 18.20),   
+    ("ODE Rk4", 2): (0.10, 17.20),  
+    ("ODE Rk4", 3): (0.40, 18.60),   
+    ("ODE Rk4", 4): (0.10, 19.60),   
+    ("ODE Rk4", 5): (0.10, 19.40),  
+    # Residual
+    ("Residual", 1): (0.00, 20.00), 
+    ("Residual", 2): (0.10, 18.80),  
+    ("Residual", 3): (0.10, 20.00), 
+    ("Residual", 4): (0.30, 18.10),  
+    ("Residual", 5): (0.10, 19.90),  
+}
 
 # Configuration based on the data and previous script style
 num_steps_list = [1, 2, 3, 4, 5] # x-axis values
-models = ["Neural Ode", "Residual"] # Models included
-max_steps_per_episode = 20 # Infer MAX_STEPS from the data
-eval_type = "Free Space" # "Obstacle" or "Free Space"
-plot_filename = f"media/evaluation_summary_plot_{eval_type}.png" # Output filename
+models = ["ODE Dopri5", "ODE Euler", "ODE Rk4", "Residual"] # Models included
+max_steps_per_episode = 20 # Set a reasonable default upper bound if needed
+eval_type = "Obstacle" # "Obstacle" or "Free Space"
+
+# Ensure the media directory exists
+if not os.path.exists("media"):
+    os.makedirs("media")
+# UPDATED Filename to reflect content
+plot_filename = f"media/evaluation_avg_steps_plot_{eval_type}.png"
 
 # --- Font Size Configuration ---
 title_fontsize = 16
 label_fontsize = 14
 tick_fontsize = 12
-legend_fontsize = 11 # Keep legend slightly smaller to fit
+legend_fontsize = 11
 
 # --- Plotting Logic ---
 
-print("Generating results plot (smaller canvas, larger font)...")
+print("Generating average steps plot...")
 
-# CHANGED: Reduced figsize from (12, 7) to (9, 6)
+# Create figure and a single axes object
 fig, ax1 = plt.subplots(figsize=(9, 6))
 
-# Define plot styles consistent with the previous script
-colors = plt.cm.viridis(np.linspace(0, 1, len(models) * 2))
-linestyles_sr = ['-', '-']
-markers_sr = ['o', '*']
-linestyles_step = ['-.', '-.']
-markers_step = ['x', '+']
+# Define plot styles - Need styles for 4 models
+colors = plt.cm.viridis(np.linspace(0, 1, len(models))) # One color per model
+linestyles = ['-', '--', ':', '-.'] # 4 distinct styles
+markers = ['o', '*', 's', '^']      # 4 distinct markers
 
-# --- Axis 1 Setup (Success Rate) ---
-# CHANGED: Added fontsize
+# --- Axis Setup (Average Steps Only) ---
 ax1.set_xlabel('Number of Training Steps used for Dynamics Model', fontsize=label_fontsize)
-ax1.set_ylabel('Success Rate', color='tab:blue', fontsize=label_fontsize)
-# CHANGED: Added labelsize for ticks
-ax1.tick_params(axis='y', labelcolor='tab:blue', labelsize=tick_fontsize)
-ax1.tick_params(axis='x', labelsize=tick_fontsize) # Apply to x-axis ticks too
-ax1.set_ylim(0, 1.1)
-ax1.grid(True, axis='y', linestyle='--', alpha=0.7)
-
-# --- Axis 2 Setup (Average Steps) ---
-ax2 = ax1.twinx()
-# CHANGED: Added fontsize
-ax2.set_ylabel('Average Steps', color='tab:red', fontsize=label_fontsize)
-# CHANGED: Added labelsize for ticks
-ax2.tick_params(axis='y', labelcolor='tab:red', labelsize=tick_fontsize)
+ax1.set_ylabel('Average Steps', fontsize=label_fontsize) # Set Y label to Average Steps
+ax1.tick_params(axis='y', labelsize=tick_fontsize) # Apply labelsize to Y ticks
+ax1.tick_params(axis='x', labelsize=tick_fontsize) # Apply labelsize to X ticks
+ax1.grid(True, axis='y', linestyle='--', alpha=0.7) # Keep grid on the Y axis
 
 # --- Data Extraction and Plotting ---
 min_step_overall = max_steps_per_episode + 1
@@ -83,9 +102,9 @@ max_step_overall = 0
 lines = []
 labels = []
 
+# Loop through the models list
 for i, model_name in enumerate(models):
     model_display_name = model_name
-    success_rates = []
     avg_steps_list = []
     valid_steps_train = []
     current_model_min_step = max_steps_per_episode + 1
@@ -94,12 +113,17 @@ for i, model_name in enumerate(models):
     for num_steps in num_steps_list:
         result = results_data.get((model_name, num_steps))
         if result is not None:
-            sr, avs = result
-            success_rates.append(sr)
-            avg_steps_list.append(avs)
-            valid_steps_train.append(num_steps)
-            current_model_min_step = min(current_model_min_step, avs)
-            current_model_max_step = max(current_model_max_step, avs)
+            # Only extract average steps (index 1)
+            _sr, avs = result # Use _sr to indicate success rate is ignored
+            if isinstance(avs, (int, float)): # Check if avg steps value is valid
+                avg_steps_list.append(avs)
+                valid_steps_train.append(num_steps)
+                current_model_min_step = min(current_model_min_step, avs)
+                current_model_max_step = max(current_model_max_step, avs)
+            else:
+                # Handle cases where avg steps might be missing or invalid if necessary
+                print(f"Warning: Invalid or missing avg_steps for {model_name}, Steps: {num_steps}")
+
 
     min_step_overall = min(min_step_overall, current_model_min_step)
     max_step_overall = max(max_step_overall, current_model_max_step)
@@ -108,35 +132,26 @@ for i, model_name in enumerate(models):
         print(f"Warning: No valid results found for model '{model_display_name}'. Skipping plot lines.")
         continue
 
-    line1, = ax1.plot(valid_steps_train, success_rates,
-                      marker=markers_sr[i],
-                      linestyle=linestyles_sr[i],
-                      color=colors[2*i],
-                      label=f'{model_display_name} - Success Rate')
-    lines.append(line1)
-    labels.append(f'{model_display_name} - Success Rate')
-
-    line2, = ax2.plot(valid_steps_train, avg_steps_list,
-                      marker=markers_step[i],
-                      linestyle=linestyles_step[i],
-                      color=colors[2*i+1],
-                      label=f'{model_display_name} - Avg Steps')
-    lines.append(line2)
-    labels.append(f'{model_display_name} - Avg Steps')
+    # Plot ONLY Average Steps on ax1
+    line, = ax1.plot(valid_steps_train, avg_steps_list,
+                     marker=markers[i],
+                     linestyle=linestyles[i],
+                     color=colors[i], # Use color based on index
+                     label=model_display_name) # Simplified label for legend
+    lines.append(line)
+    labels.append(model_display_name) # Add model name to labels list
 
 # --- Final Plot Adjustments ---
-if min_step_overall > max_steps_per_episode: min_step_overall = 0
-ax2.set_ylim(max(0, min_step_overall - 2) , max_step_overall + 2)
+# Recalculate y-limits based on actual data range for average steps
+if min_step_overall > max_steps_per_episode: min_step_overall = 0 # If no steps found, start at 0
+# Set y-limits for average steps on ax1 with a small buffer
+ax1.set_ylim(max(0, min_step_overall - 1), max_step_overall + 1)
 
-# CHANGED: Added fontsize
-plt.title(f'Model Performance vs. Training Steps ({eval_type})', fontsize=title_fontsize) # Shortened title slightly
-# CHANGED: Added fontsize
-ax1.legend(lines, labels, loc='best', fontsize=legend_fontsize)
-ax1.set_xticks(num_steps_list)
+plt.title(f'Average Steps vs. Training Steps ({eval_type})', fontsize=title_fontsize) # Updated title
+ax1.legend(lines, labels, loc='best', fontsize=legend_fontsize) # Legend for the plotted lines
+ax1.set_xticks(num_steps_list) # Ensure ticks are at the specified step counts
 
-# IMPORTANT: Use tight_layout() to prevent labels/titles from overlapping
-# This is especially crucial with larger fonts on a smaller canvas.
-fig.tight_layout()
+fig.tight_layout() # Adjust layout to prevent labels overlapping
 
 # --- Save and Show Plot ---
 try:
@@ -146,6 +161,6 @@ try:
 except Exception as e:
     print(f"Error saving/showing plot '{plot_filename}': {e}")
 finally:
-     plt.close(fig)
+     plt.close(fig) # Close the figure window
 
-print("Plot generation complete.")
+print("Average steps plot generation complete.")

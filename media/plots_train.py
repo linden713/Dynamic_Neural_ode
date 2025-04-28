@@ -5,7 +5,7 @@ import numpy as np # For linspace with colormap
 
 # --- Configuration ---
 BASE_DATA_DIR = 'plots' # Base directory containing model subdirectories with CSVs
-MODELS = ['ode', 'residual'] # List of model types to process
+MODELS = ['ode_euler', 'residual'] # List of model types to process
 STEPS = [1, 2, 3, 4, 5] # List of step configurations for each model
 # Add smoothing window size configuration
 SMOOTHING_WINDOW = 12 # Window size for moving average on training loss
@@ -29,7 +29,7 @@ colors = plt.cm.viridis(np.linspace(0, 1, len(STEPS))) # Colormap for different 
 linestyles = {'ode': '-', 'residual': '--'} # Linestyles for different models
 
 # --- Data Loading and Plotting Loop ---
-print(f"Loading data and generating log-scale loss plots (Train loss smoothed with window={SMOOTHING_WINDOW})...")
+print(f"Loading data and generating log-scale loss plots ...")
 file_found_count = 0 # Counter for successfully processed files
 
 for model in MODELS:

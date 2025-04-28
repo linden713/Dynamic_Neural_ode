@@ -21,7 +21,7 @@ BATCH_SIZE = 500
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CHECKPOINT_DIR = "checkpoint" 
 PLOT_DIR = "media/plots"
-ODE_METHODS_LIST = ['rk4', 'euler']
+ODE_METHODS_LIST = ['rk4', 'euler', 'dopri5']
 NUM_STEPS_LIST = [1, 2, 3, 4, 5] 
 
 def train_step(model, train_loader, optimizer, loss_fn) -> float:
