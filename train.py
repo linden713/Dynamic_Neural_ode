@@ -16,12 +16,14 @@ import os
 MODEL = "ode"
 LR = 0.0001
 NUM_EPOCHS = 3000
-NUM_STEPS = 4
+NUM_STEPS = 3
 BATCH_SIZE = 500
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 CHECKPOINT_DIR = "checkpoint" 
 PLOT_DIR = "media/plots"
-NUM_STEPS_LIST = [1, 2, 3, 5]
+ODE_METHODS_LIST = ['rk4', 'euler']
+NUM_STEPS_LIST = [1, 2, 3, 4, 5] 
+
 def train_step(model, train_loader, optimizer, loss_fn) -> float:
     """
     Performs an epoch train step.
@@ -36,8 +38,9 @@ def train_step(model, train_loader, optimizer, loss_fn) -> float:
     for batch_idx, batch_data in enumerate(train_loader):
         state = batch_data['state'].to(DEVICE)
         action = batch_data['action'].to(DEVICE)
-        next_state_gth = batch_data['next_state'].to(DEVICE)
+        next_state_gth = batch_data['next_state'].to(DEVICE) # Ground truth next states over NUM_STEPS
         optimizer.zero_grad()
+        # The loss function MultiStepLoss internally calls the model multiple times
         loss = loss_fn(model, state, action, next_state_gth)
         loss.backward()
         optimizer.step()
@@ -60,7 +63,8 @@ def val_step(model, val_loader, loss_fn) -> float:
         for batch_idx, batch_data in enumerate(val_loader):
             state = batch_data['state'].to(DEVICE)
             action = batch_data['action'].to(DEVICE)
-            next_state_gth = batch_data['next_state'].to(DEVICE)
+            next_state_gth = batch_data['next_state'].to(DEVICE) # Ground truth next states over NUM_STEPS
+            # The loss function MultiStepLoss internally calls the model multiple times
             loss = loss_fn(model, state, action, next_state_gth)
             val_loss += loss.item()
 
@@ -90,8 +94,9 @@ def train_model(model, train_dataloader, val_dataloader, loss_fn, save_path, num
 
     # --- Create checkpoint directory if it doesn't exist ---
     save_dir = os.path.dirname(save_path)
-    if save_dir:
-        os.makedirs(save_dir, exist_ok=True) 
+    if save_dir and not os.path.exists(save_dir):
+        os.makedirs(save_dir, exist_ok=True)
+        print(f"Created directory: {save_dir}")
 
     for epoch_i in pbar:
         train_loss_i = train_step(model, train_dataloader, optimizer, loss_fn)
@@ -105,83 +110,114 @@ def train_model(model, train_dataloader, val_dataloader, loss_fn, save_path, num
 
         # --- Save Best Model ---
         if val_loss_i < best_val_loss:
-            print(f"Epoch {epoch_i+1}: New best model saved with validation loss: {val_loss_i:.4f}")
+            print(f"\nEpoch {epoch_i+1}: New best model saved with validation loss: {val_loss_i:.4f}")
             best_val_loss = val_loss_i
             torch.save(model.state_dict(), save_path)
             # Optional: Add an indicator to the progress bar or print a message
             pbar.set_postfix_str(f'Best val loss: {best_val_loss:.4f} (saved)', refresh=True)
             # print(f"Epoch {epoch_i+1}: New best model saved with validation loss: {best_val_loss:.4f}")
+        else:
+             pbar.set_postfix_str(f'Best val loss: {best_val_loss:.4f}', refresh=True)
 
-    print(f"Training finished. Best validation loss: {best_val_loss:.4f}")
+
+    print(f"\nTraining finished. Best validation loss: {best_val_loss:.4f}")
     print(f"Best model saved to: {save_path}")
     return train_losses, val_losses
 
 
 if __name__ == "__main__":
-    
     for NUM_STEPS in NUM_STEPS_LIST:
-        # load data
-        pushing_multistep_residual_dynamics_model = None
-        collected_data = np.load("data/collected_data.npy", allow_pickle=True) 
-        train_loader, val_loader = process_data_multiple_step(collected_data, 
-                                                            batch_size=BATCH_SIZE, 
+        # --- Load Data Once ---
+        # Data loading and processing depend only on NUM_STEPS, not the ODE method
+        print(f"Loading data for NUM_STEPS = {NUM_STEPS}...")
+        collected_data = np.load("data/collected_data.npy", allow_pickle=True)
+        train_loader, val_loader = process_data_multiple_step(collected_data,
+                                                            batch_size=BATCH_SIZE,
                                                             num_steps=NUM_STEPS)
+        print("Data loaded.")
 
-        # loss function
-        pose_loss = SE2PoseLoss(block_width=0.1, block_length=0.1)
-        pose_loss = MultiStepLoss(pose_loss, discount=0.9)
-
-        # create model
+        # --- Environment Info ---
         env = PandaPushingEnv()
         env.reset()
         state_dim, action_dim = env.observation_space.shape[0], env.action_space.shape[0]
-        if MODEL == "ode":
-            dynamics_model = NeuralODEDynamicsModel(state_dim, action_dim).to(DEVICE)
-        elif MODEL == "residual":
-            dynamics_model = ResidualDynamicsModel(state_dim, action_dim).to(DEVICE)
-        print(f"Created model: {MODEL}")
-        
-        # Define save path for the model
-        model_save_path = os.path.join(CHECKPOINT_DIR, f'{MODEL}/pushing_{NUM_STEPS}_steps_{MODEL}_dynamics_model.pt')
-        plot_save_path = os.path.join(PLOT_DIR, f'{MODEL}/train_val_loss_{MODEL}_{NUM_STEPS}_steps.png')
-        csv_save_path = os.path.join(PLOT_DIR, f'loss_history_{MODEL}_{NUM_STEPS}_steps.csv') # Define CSV path
-        
-        # training
-        train_losses, val_losses = train_model(dynamics_model,
-                                            train_loader,
-                                            val_loader,
-                                            loss_fn=pose_loss, # Pass the loss function
-                                            save_path=model_save_path, # Pass the save path
-                                            num_epochs=NUM_EPOCHS,
-                                            lr=LR
-                                            )
+        print(f"State Dim: {state_dim}, Action Dim: {action_dim}")
 
-        # save model
-        torch.save(dynamics_model.state_dict(), model_save_path)
-        # save csv 
-        loss_data = {
-            'epoch': list(range(1, len(train_losses) + 1)), # Epoch numbers (starting from 1)
-            'train_loss': train_losses,
-            'validation_loss': val_losses
-        }
-        loss_df = pd.DataFrame(loss_data)
-        
-        # Save to CSV
-        loss_df.to_csv(csv_save_path, index=False) 
-        print(f"Loss history saved to: {csv_save_path}")
-        
-        # plot train loss and test loss
-        plt.figure(figsize=(10, 5)) # Create a single figure
-        plt.plot(train_losses, label='Train Loss')
-        plt.plot(val_losses, label='Validation Loss')
-        plt.yscale('log') # Use log scale for y-axis
-        plt.title(f'Training & Validation Loss ({MODEL}, {NUM_STEPS} steps)')
-        plt.xlabel('Epochs')
-        plt.ylabel('Loss (Log Scale)')
-        plt.legend() # Show legend
-        plt.grid(True)
-        plt.savefig(plot_save_path) # Save the plot to the plots directory
-        print(f"Loss plot saved to: {plot_save_path}")
-        # plt.show() # Display the plot
+        # --- Loop Over ODE Integration Methods ---
+        for ode_method in ODE_METHODS_LIST:
+            print(f"\n===== Training with ODE Method: {ode_method} =====")
+            MODEL_TYPE = f"ode_{ode_method}" # Use this for naming outputs
+
+            # --- Loss Function ---
+            # Re-initialize loss for safety, although it might be stateless
+            pose_loss_func = SE2PoseLoss(block_width=0.1, block_length=0.1)
+            # MultiStepLoss applies the model recursively 
+            multi_step_loss = MultiStepLoss(pose_loss_func, discount=0.9) 
+            # --- Create Model ---
+            # Create a new model instance for each ODE method
+            dynamics_model = NeuralODEDynamicsModel(state_dim, action_dim, ode_method=ode_method).to(DEVICE)
+            print(f"Created Neural ODE model with method: {ode_method}")
+
+            # --- Define Save Paths ---
+            # Include the ODE method in the filenames
+            method_checkpoint_dir = os.path.join(CHECKPOINT_DIR, MODEL_TYPE)
+            method_plot_dir = os.path.join(PLOT_DIR, MODEL_TYPE)
+
+            # Create specific directories for this method if they don't exist
+            os.makedirs(method_checkpoint_dir, exist_ok=True)
+            os.makedirs(method_plot_dir, exist_ok=True)
+
+            model_save_path = os.path.join(method_checkpoint_dir, f'pushing_{NUM_STEPS}_steps_{MODEL_TYPE}_dynamics_model.pt')
+            plot_save_path = os.path.join(method_plot_dir, f'train_val_loss_{MODEL_TYPE}_{NUM_STEPS}_steps.png')
+            csv_save_path = os.path.join(method_plot_dir, f'loss_history_{MODEL_TYPE}_{NUM_STEPS}_steps.csv')
+
+            print(f"Model save path: {model_save_path}")
+            print(f"Plot save path: {plot_save_path}")
+            print(f"CSV save path: {csv_save_path}")
+
+            # --- Training ---
+            train_losses, val_losses = train_model(dynamics_model,
+                                                train_loader,
+                                                val_loader,
+                                                loss_fn=multi_step_loss, # Use the multi-step loss
+                                                save_path=model_save_path,
+                                                num_epochs=NUM_EPOCHS,
+                                                lr=LR
+                                                )
+
+            # --- Save Final Model State (Optional, train_model already saves the best) ---
+            # You might want to save the *final* model state regardless of validation performance
+            # final_model_save_path = os.path.join(method_checkpoint_dir, f'pushing_{NUM_STEPS}_steps_{MODEL_TYPE}_dynamics_model_final.pt')
+            # torch.save(dynamics_model.state_dict(), final_model_save_path)
+            # print(f"Final model state saved to: {final_model_save_path}")
+
+
+            # --- Save Loss History CSV ---
+            loss_data = {
+                'epoch': list(range(1, len(train_losses) + 1)), # Epoch numbers (starting from 1)
+                'train_loss': train_losses,
+                'validation_loss': val_losses
+            }
+            loss_df = pd.DataFrame(loss_data)
+
+            # Save to CSV
+            loss_df.to_csv(csv_save_path, index=False)
+            print(f"Loss history saved to: {csv_save_path}")
+
+            # --- Plot Train/Validation Loss ---
+            plt.figure(figsize=(10, 5)) # Create a new figure for each method
+            plt.plot(train_losses, label='Train Loss')
+            plt.plot(val_losses, label='Validation Loss')
+            plt.yscale('log') # Use log scale for y-axis
+            plt.title(f'Training & Validation Loss (ODE Method: {ode_method}, {NUM_STEPS} steps)')
+            plt.xlabel('Epochs')
+            plt.ylabel('Loss (Log Scale)')
+            plt.legend() # Show legend
+            plt.grid(True, which='both', linestyle='--', linewidth=0.5) # Grid for log scale
+            plt.tight_layout() # Adjust layout
+            plt.savefig(plot_save_path) # Save the plot
+            print(f"Loss plot saved to: {plot_save_path}")
+            plt.close() # Close the plot to free memory
+
+    print("\n===== All training runs completed. =====")
 
     
