@@ -7,6 +7,10 @@ chmod +x install.sh && ./install.sh
 ## Collect Dataset
 Using pre-recorded dataset - `data/collected_data.npy`
 
+## Train
+```shell
+python demo.py
+```
 
 ## Train
 ```shell
