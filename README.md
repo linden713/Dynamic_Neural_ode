@@ -1,25 +1,55 @@
-## Installation
+# Using Neural ODE and MPPI for Panda Arm PushCube Task
 
-```shell
+
+## 🚀 Installation
+
+```bash
 chmod +x install.sh && ./install.sh
 ```
 
-## Collect Dataset
-Using pre-recorded dataset - `data/collected_data.npy`
+---
 
-## Demo
-```shell
+## 📦 Dataset
+
+- This project uses a pre-recorded dataset located at:
+
+```
+data/collected_data.npy
+```
+
+---
+
+## 🎬 Demo
+
+Run a quick demo with:
+
+```bash
 python demo.py
 ```
 
-## Train
-```shell
+---
+
+## 🏋️‍♂️ Training
+
+To train the model from scratch:
+
+```bash
 python train.py
 ```
 
-## Evaluation
-```shell
+---
+
+## 📈 Evaluation
+
+Evaluate the trained policy:
+
+```bash
 python eval.py
 ```
 
+---
+
+## 📄 Paper
+
+You can find more information and plots in paper here: [paper.pdf](./paper.pdf)
 
